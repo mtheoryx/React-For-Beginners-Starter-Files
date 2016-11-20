@@ -14,6 +14,7 @@ class App extends React.Component {
         this.addFish = this.addFish.bind(this);
         this.loadSamples = this.loadSamples.bind(this);
         this.addToOrder = this.addToOrder.bind(this);
+        this.updateFish = this.updateFish.bind(this);
 
         //Initial state
         this.state={
@@ -63,6 +64,17 @@ class App extends React.Component {
         this.setState({ fishes });
     }
 
+    updateFish(key, updatedFish) {
+        //Copy fishes state
+        const fishes = {...this.state.fishes};
+
+        //Update state with new fish
+        fishes[key] = updatedFish;
+
+        //Set state with new updated fishes
+        this.setState({fishes})
+    }
+
     loadSamples() {
         this.setState({
             fishes: sampleFishes
@@ -101,7 +113,9 @@ class App extends React.Component {
                        params={this.props.params}
                 />
                 <Inventory addFish={ this.addFish }
-                           loadSamples={ this.loadSamples } />
+                           loadSamples={ this.loadSamples }
+                           updateFish={ this.updateFish }
+                           fishes={ this.state.fishes } />
             </div>
         )
     }
